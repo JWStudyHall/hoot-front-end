@@ -8,6 +8,7 @@ import HootList from "./components/HootList/HootList.jsx";
 import HootCreate from "./components/HootCreate/HootCreate.jsx";
 import Landing from "./components/Landing/Landing.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
+import HootDetail from "./components/HootDetail/HootDetail.jsx";
 
 const App = () => {
   const { user } = useContext(UserContext);
