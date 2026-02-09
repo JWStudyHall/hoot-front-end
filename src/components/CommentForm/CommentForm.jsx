@@ -3,7 +3,8 @@ import { useState } from "react";
 const CommentForm = ({ handleAddComment }) => {
   const [formData, setFormData] = useState({ text: "" });
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 

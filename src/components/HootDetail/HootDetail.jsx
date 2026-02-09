@@ -1,26 +1,30 @@
-import { useParams, useContext, Link } from "react-router";
-import { useState, useEffect } from "react";
-import { deleteHoot, getHoot } from "../services/hoots.js";
-import { UserContext } from "../contexts/UserContext";
+import { useParams, Link, useNavigate } from "react-router";
+import { useState, useEffect, useContext } from "react";
+import { deleteHoot, getHoot, createComment } from "../../services/hoots.js";
+import { UserContext } from "../../contexts/UserContext.jsx";
+import CommentForm from "../CommentForm/CommentForm.jsx";
 
 function HootDetail() {
-  const { hootId } = useParams();
-  const { user } = useContext(UserContext);
   const [hoot, setHoot] = useState(null);
 
+  const { user } = useContext(UserContext);
+  const { hootId } = useParams();
+  const navigate = useNavigate();
+
+  const fetchHoot = async () => {
+    const hootData = await getHoot(hootId);
+    setHoot(hootData);
+  };
+
   useEffect(() => {
-    const fetchHoot = async () => {
-      const hootData = await getHoot(hootId);
-      setHoot(hootData);
-    };
     fetchHoot();
   }, [hootId]);
 
   if (!hoot) return <main>Loading...</main>;
 
   const handledAddComment = async (commentFormData) => {
-    const newComment = await hootService.createComment(hootId, commentFormData);
-    setHoot({ ...hoot, comments: [...hoot.comments, newComment] });
+    await createComment(hootId, commentFormData);
+    fetchHoot();
   };
 
   return (
@@ -35,9 +39,21 @@ function HootDetail() {
           </p>
         </header>
         <p>{hoot.text}</p>
-        <Link to={`/hoots/${hoot._id}/edit`}>
-          <button>Edit</button>
-        </Link>
+        {hoot.author._id === user._id && (
+          <>
+            <Link to={`/hoots/${hoot._id}/edit`}>
+              <button>Edit</button>
+            </Link>
+            <button
+              onClick={() => {
+                deleteHoot(hootId);
+                navigate("/hoots");
+              }}
+            >
+              Delete
+            </button>
+          </>
+        )}
       </section>
       <section>
         <h2>Comments</h2>

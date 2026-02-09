@@ -44,3 +44,16 @@ export const updateHoot = async (hootId, hootData) => {
     console.log(error);
   }
 };
+
+export const createComment = async (hootId, commentFormData) => {
+  try {
+    const { data } = await api.post(
+      `/hoots/${hootId}/comments`,
+      commentFormData,
+    );
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
