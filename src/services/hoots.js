@@ -9,6 +9,14 @@ export const getHoots = async () => {
   }
 };
 
+export const getHoot = async () => {
+  try {
+    const { data } = await api.get("/hoots/:hootsId");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const createHoots = async () => {
   try {
