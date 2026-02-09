@@ -1,5 +1,4 @@
 import api from "./apiConfig.js";
-import axios from "axios";
 
 export const getHoots = async () => {
   try {
@@ -28,6 +27,15 @@ export const createHoots = async (hootData) => {
   }
 };
 
+export const deleteHoot = async (hootId) => {
+  try {
+    const { data } = await api.delete(`/hoots/${hootId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updateHoot = async (hootId, hootData) => {
   try {
     const { data } = await api.put(`/hoots/${hootId}`, hootData);
@@ -39,19 +47,13 @@ export const updateHoot = async (hootId, hootData) => {
 
 export const createComment = async (hootId, commentFormData) => {
   try {
-    const res = await axios.post(
-      `${BASE_URL}/${hootId}/comments`,
+    const { data } = await api.post(
+      `/hoots/${hootId}/comments`,
       commentFormData,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
     );
 
-    return res.data;
+    return data;
   } catch (error) {
     console.log(error);
   }
 };
-

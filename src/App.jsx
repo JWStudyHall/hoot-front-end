@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { Routes, Route } from "react-router";
 import { UserContext } from "./contexts/UserContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/hoots" element={<HootList />} />
         <Route path="/hoots/:hootId" element={<HootDetail />} />
         <Route path="/hoots/new" element={<HootCreate />} />
-        <Route path="hoots/:hootId/edit" element={<HootEdit />} />
+        <Route path="/hoots/:hootId/edit" element={<HootEdit />} />
         <Route path="/sign-up" element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
       </Routes>
