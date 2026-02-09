@@ -27,7 +27,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={user ? <Dashboard /> : <Landing />} />
-        <Route path="/hoots" element={<HootList />} />
+        <Route path="/hoots" element={<HootList hoots={hoots}  />} />
         <Route path="/hoots/:hootId" element={<HootDetail />} />
         <Route path="/hoots/new" element={<HootCreate />} />
         <Route path="/sign-up" element={<SignUpForm />} />
