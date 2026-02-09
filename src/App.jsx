@@ -4,6 +4,7 @@ import { UserContext } from "./contexts/UserContext.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import SignUpForm from "./components/SignUpForm/SignUpForm.jsx";
 import SignInForm from "./components/SignInForm/SignInForm.jsx";
+import HootList from "./components/HootList/HootList.jsx";
 import Landing from "./components/Landing/Landing.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 
@@ -15,6 +16,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={user ? <Dashboard /> : <Landing />} />
+        <Route path="/hoots" element={<HootList />} />
         <Route path="/sign-up" element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
       </Routes>
