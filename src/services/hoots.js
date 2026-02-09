@@ -1,27 +1,15 @@
-import axios from "axios";
+import api from "./apiConfig.js";
 
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/hoots`;
-
-const index = async () => {
+export const getHoots = async () => {
   try {
-    const res = await fetch(BASE_URL, {
-      headers: { Authorization: `Bearer ${localStorage.getitem("token")}` },
-    });
+    const { data } = await api.get("/hoots");
+    return data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export { index };
 
-// export const getPets = async () => {
-//   try {
-//     const response = await axios.get(BASE_URL);
-//     return response.data;
-//   } catch (error) {
-//     (console, log(error));
-//   }
-// };
 
 // export const getPet = async (petId) => {
 //   try {
