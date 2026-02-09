@@ -1,13 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { createHoots } from "../../services/hoots.js";
+import { useParams, useNavigate } from "react-router";
+import { useState, useEffect } from "react";
+import { getHoot, updateHoot } from "../../services/hoots";
 
-const HootCreate = () => {
+export const HootEdit = () => {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
     category: "News",
   });
+
+  const { hootId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchHoot = async () => {
+      const hootData = await getHoot(hootId);
+      setFormData(hootData);
+    };
+    fetchHoot();
+  }, [hootId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,12 +28,10 @@ const HootCreate = () => {
     }));
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createHoots(formData);
-    navigate("/hoots");
+    await updateHoot(hootId, formData);
+    navigate(`/hoots/${hootId}`);
   };
 
   return (
@@ -66,5 +75,3 @@ const HootCreate = () => {
     </main>
   );
 };
-
-export default HootCreate;
