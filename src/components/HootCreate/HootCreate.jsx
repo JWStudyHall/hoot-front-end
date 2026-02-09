@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { createHoots } from "../../services/hoots.js";
 
-const HootCreate = (props) => {
+const HootCreate = () => {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
@@ -16,11 +17,12 @@ const HootCreate = (props) => {
     }));
   };
 
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData", formData);
+    await createHoots(formData);
+    navigate("/hoots");
   };
 
   return (
