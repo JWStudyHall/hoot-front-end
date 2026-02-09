@@ -18,18 +18,14 @@ export const getHoot = async () => {
   }
 };
 
-
-
-
-
-// export const createPet = async (petData) => {
-//   try {
-//     const response = await axios.post(BASE_URL, petData);
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const createHoots = async () => {
+  try {
+    const { data } = await api.post("/hoots/new");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const updatePet = async (petId, petData) => {
 //   try {
