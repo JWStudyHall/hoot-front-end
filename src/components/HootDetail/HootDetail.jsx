@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { useState, useEffect } from "react";
 import { getHoot } from "../../services/hoots.js";
 import CommentForm from "../CommentForm/CommentForm.jsx";
@@ -34,6 +34,9 @@ function HootDetail() {
           </p>
         </header>
         <p>{hoot.text}</p>
+        <Link to={`/hoots/${hoot._id}/edit`}>
+          <button>Edit</button>
+        </Link>
       </section>
       <section>
         <h2>Comments</h2>
