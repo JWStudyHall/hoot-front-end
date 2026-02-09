@@ -27,6 +27,18 @@ export const createHoots = async () => {
   }
 };
 
+export const deleteHoot = async (hootId) => {
+  try {
+    const { data } = await api.delete(`/hoots/${hootId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+
 // export const updatePet = async (petId, petData) => {
 //   try {
 //     const response = await axios.put(`${BASE_URL}/${petId}`, petData);

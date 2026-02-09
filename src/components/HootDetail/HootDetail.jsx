@@ -1,15 +1,16 @@
-import React from 'react'
-import { useParams } from 'react-router';
-import { useState, useEffect } from 'react';
-import * as hootService from '../../services/hootService';
-
+import { useParams, useContext } from "react-router";
+import { useState, useEffect } from "react";
+import { deleteHoot, getHoot } from "../services/hoots.js";
+import { UserContext } from "../contexts/UserContext";
 
 function HootDetail() {
-    const { hootId } = useParams();
+  const { hootId } = useParams();
+  const { user } = useContext(UserContext);
+  const [hoot, setHoot] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchHoot = async () => {
-      const hootData = await hootService.show(hootId);
+      const hootData = await getHoot(hootId);
       setHoot(hootData);
     };
     fetchHoot();
@@ -44,11 +45,24 @@ function HootDetail() {
             </header>
             <p>{comment.text}</p>
           </article>
-          ))}
+        ))}
+        <header>
+          <p>{hoot.category.toUpperCase()}</p>
+          <h1>{hoot.title}</h1>
+          <p>
+            {`${hoot.author.username} posted on
+              ${new Date(hoot.createdAt).toLocaleDateString()}`}
+          </p>
+          {/* Add the following */}
+          {hoot.author._id === user._id && (
+            <>
+              <button onClick={() => deleteHoot(hootId)}>Delete</button>
+            </>
+          )}
+        </header>
       </section>
     </main>
-    
-  )
+  );
 }
 
-export default HootDetail
+export default HootDetail;
