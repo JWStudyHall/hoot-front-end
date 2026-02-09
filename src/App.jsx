@@ -9,6 +9,7 @@ import HootCreate from "./components/HootCreate/HootCreate.jsx";
 import Landing from "./components/Landing/Landing.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import HootDetail from "./components/HootDetail/HootDetail.jsx";
+import { HootEdit } from "./components/HootEdit/HootEdit.jsx";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/hoots" element={<HootList />} />
         <Route path="/hoots/:hootId" element={<HootDetail />} />
         <Route path="/hoots/new" element={<HootCreate />} />
+        <Route path="hoots/:hootId/edit" element={<HootEdit />} />
         <Route path="/sign-up" element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
       </Routes>

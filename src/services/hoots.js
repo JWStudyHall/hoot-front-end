@@ -27,14 +27,14 @@ export const createHoots = async (hootData) => {
   }
 };
 
-// export const updatePet = async (petId, petData) => {
-//   try {
-//     const response = await axios.put(`${BASE_URL}/${petId}`, petData);
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const updateHoot = async (hootId, hootData) => {
+  try {
+    const { data } = await api.put(`/hoots/${hootId}`, hootData);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const deletePet = async (petId) => {
 //   try {
