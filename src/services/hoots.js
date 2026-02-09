@@ -9,16 +9,18 @@ export const getHoots = async () => {
   }
 };
 
+export const getHoot = async () => {
+  try {
+    const { data } = await api.get("/hoots/:hootsId");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
-// export const getPet = async (petId) => {
-//   try {
-//     const response = await axios.get(`${BASE_URL}/${petId}`);
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+
+
 
 // export const createPet = async (petData) => {
 //   try {
