@@ -6,6 +6,7 @@ import SignUpForm from "./components/SignUpForm/SignUpForm.jsx";
 import SignInForm from "./components/SignInForm/SignInForm.jsx";
 import Landing from "./components/Landing/Landing.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
+import HootDetail from "./components/HootDetail/HootDetail.jsx";
 
 const App = () => {
   const { user } = useContext(UserContext);
