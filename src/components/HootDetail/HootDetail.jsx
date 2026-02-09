@@ -1,15 +1,14 @@
-import React from 'react'
-import { useParams } from 'react-router';
-import { useState, useEffect } from 'react';
-import * as hootService from '../../services/hootService';
-
+import { useParams } from "react-router";
+import { useState, useEffect } from "react";
+import { getHoot } from "../../services/hoots.js";
 
 function HootDetail() {
-    const { hootId } = useParams();
+  const [hoot, setHoot] = useState({});
+  const { hootId } = useParams();
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchHoot = async () => {
-      const hootData = await hootService.show(hootId);
+      const hootData = await getHoot(hootId);
       setHoot(hootData);
     };
     fetchHoot();
@@ -21,10 +20,10 @@ function HootDetail() {
     <main>
       <section>
         <header>
-          <p>{hoot.category.toUpperCase()}</p>
           <h1>{hoot.title}</h1>
+          <p>{hoot.category?.toUpperCase()}</p>
           <p>
-            {`${hoot.author.username} posted on
+            {`${hoot.author?.username} posted on
             ${new Date(hoot.createdAt).toLocaleDateString()}`}
           </p>
         </header>
@@ -32,9 +31,9 @@ function HootDetail() {
       </section>
       <section>
         <h2>Comments</h2>
-        {!hoot.comments.length && <p>There are no comments.</p>}
+        {!hoot.comments?.length && <p>There are no comments.</p>}
 
-        {hoot.comments.map((comment) => (
+        {hoot.comments?.map((comment) => (
           <article key={comment._id}>
             <header>
               <p>
@@ -44,11 +43,10 @@ function HootDetail() {
             </header>
             <p>{comment.text}</p>
           </article>
-          ))}
+        ))}
       </section>
     </main>
-    
-  )
+  );
 }
 
-export default HootDetail
+export default HootDetail;

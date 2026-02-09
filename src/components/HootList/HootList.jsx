@@ -1,7 +1,20 @@
 import { Link } from "react-router";
+import { useState, useEffect } from "react";
+import { getHoots } from "../../services/hoots.js";
 
-const HootList = ({hoots}) => {
-  return  (
+const HootList = () => {
+  const [hoots, setHoots] = useState([]);
+
+  useEffect(() => {
+    const fetchAllHoots = async () => {
+      const hootsData = await getHoots();
+      setHoots(hootsData);
+    };
+
+    fetchAllHoots();
+  }, []);
+
+  return (
     <main>
       {hoots.map((hoot) => (
         <Link key={hoot._id} to={`/hoots/${hoot._id}`}>
@@ -20,7 +33,5 @@ const HootList = ({hoots}) => {
     </main>
   );
 };
-
-
 
 export default HootList;

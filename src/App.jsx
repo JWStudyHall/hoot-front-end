@@ -9,25 +9,16 @@ import HootCreate from "./components/HootCreate/HootCreate.jsx";
 import Landing from "./components/Landing/Landing.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import HootDetail from "./components/HootDetail/HootDetail.jsx";
-import * as hootService from "./services/hoots.js";
 
 const App = () => {
   const { user } = useContext(UserContext);
-  const [hoots, setHoots] = useState([]);
-
-  useEffect(() => {
-    const fetchAllHoots = async () => {
-      const hootsData = await hootService.index();
-    };
-    if (user) fetchAllHoots();
-  }, [user]);
 
   return (
     <>
       <NavBar />
       <Routes>
         <Route path="/" element={user ? <Dashboard /> : <Landing />} />
-        <Route path="/hoots" element={<HootList hoots={hoots}  />} />
+        <Route path="/hoots" element={<HootList />} />
         <Route path="/hoots/:hootId" element={<HootDetail />} />
         <Route path="/hoots/new" element={<HootCreate />} />
         <Route path="/sign-up" element={<SignUpForm />} />
